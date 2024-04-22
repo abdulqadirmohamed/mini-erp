@@ -1,144 +1,79 @@
 "use client"
 import React, { useState } from 'react'
 import UserItem from './UserItem'
-
 import { Command, CommandGroup, CommandItem, CommandList } from './ui/command'
-import { BadgeCentIcon, CookieIcon, Gauge, Landmark, MessageSquare, Settings, ShoppingBag, User, Users } from 'lucide-react'
 import Link from 'next/link'
-import { Button } from './ui/button'
-import { useRouter } from 'next/navigation'
-import {usePathname} from 'next/navigation'
+import { SideBarItems } from './constants'
+import { usePathname } from 'next/navigation';
+import { ChevronDown } from 'lucide-react'
+import { Variants, motion } from "framer-motion"
+
+const itemVariants: Variants = {
+    open: {
+        opacity: 1,
+        y: 0,
+        transition: { type: "spring", stiffness: 300, damping: 24 }
+    },
+    closed: { opacity: 0, y: 20, transition: { duration: 0.2 } }
+};
 
 const Sidebar = () => {
-    const [show, setShow] = useState(false)
+    const pathname = usePathname();
 
-    const router = useRouter();
-    const pathname = usePathname()
+    const [subMenuOpen, setSubMenuOpen] = useState(null)
 
-    const isActive = (path:any) => {
-        return router.pathname === path;
+    const toggleSubMenu = (menuName: any) => {
+        setSubMenuOpen((prevMenu) => (prevMenu === menuName ? null : menuName));
+        console.log(subMenuOpen
+
+
+        )
     };
 
-    const menuList = [
-        {
-            group: 'General',
-            items: [
-                {
-                    link: "/",
-                    title: "Dashboard",
-                    icon: <Gauge size={20} />,
-                },
-                {
-                    title: "Sale",
-                    link: "/sale",
-                    icon: <BadgeCentIcon size={20} />,
-                    options: [
-                        {
-                            url: "/new-sale",
-                            title: "New Sale",
-                        },
-                        {
-                            url: "/manage-sale",
-                            title: "Manage Sale",
-                        },
-                        {
-                            url: "/sales-terms-list",
-                            title: "Sales Terms List",
-                        },
-                    ]
-                },
-                {
-                    title: "Customer",
-                    link: "/customer",
-                    icon: <Users size={20} />,
-                    options: [
-                        {
-                            url: "/add-customer",
-                            title: "Add Customer",
-                        },
-                        {
-                            url: "customer-list",
-                            title: "Customer List",
-                        },
-
-                    ]
-                },
-                {
-                    title: "Product",
-                    link: "/product",
-                    icon: <ShoppingBag size={20} />
-
-                },
-                {
-                    title: "Quotation",
-                    link: "/quotation",
-                    icon: <User size={20} />
-                },
-                {
-                    title: "Accounts",
-                    link: "/supplier",
-                    icon: <Landmark size={20} />
-                },
-            ]
-        },
-        {
-            group: 'Setting',
-            items: [
-                {
-                    link: "/",
-                    title: "General Setting",
-                    icon: <Settings size={20} />
-                },
-                {
-                    link: "/",
-                    icon: <MessageSquare size={20} />,
-                    title: "Logs"
-                },
-
-                {
-                    link: "/",
-                    icon: <CookieIcon size={20} />,
-                    title: "Privacy"
-                },
-            ]
-        },
-    ]
 
     return (
-        <div className='md:min-w-[300px] min-h-screen flex flex-col border-r p-4 bg-[#2C3136]'>
+        <div className='md:min-w-[300px] min-h-screen flex flex-col border-r p-4'>
             <div >
                 <UserItem />
             </div>
             <div className='grow h-full'>
-                <Command style={{ overflow: 'visible' }} className='bg-[#2C3136]'>
+                <Command style={{ overflow: 'visible' }} className=''>
                     <CommandList style={{ overflow: 'visible' }}>
-                        {menuList.map((menu: any, key: number) => (
-                            <CommandGroup key={key} heading={menu.group}>
-                                {menu.items.map((item: any, itemKey: number) => (
-                                    <div key={itemKey} className='grid grid-cols-1 text-sm text-gray-400'>
-                                        <button onClick={() => setShow(!show)}
-                                            className={`${isActive('/') ? 'font-bold': ''} w-full py-2 px-2 flex justify-start gap-3 hover:bg-gray-700 rounded-md hover:border-l-4 hover:border-green-600 border-l-4 border-[#2C3136]`}>
-                                            <span>{item.icon}</span>
-                                            <span>{item.title}</span>
-                                        </button>
-                                        <div></div>
-                                        <div className={`${show ? 'bg-[#1C1F22] flex flex-col  transition-all duration-500 ease-in' : 'hidden'}`}>
+                        {SideBarItems.map((item, index) => (
+                            <CommandGroup key={index} >
+                                {/* {menu.items.map((item: any, itemKey: number) => ( */}
+                                <div key={index} className='grid grid-cols-1 text-sm font-medium'>
+                                    <motion.button onClick={() => toggleSubMenu(item.path)}
+                                        className={` w-full py-2 px-2 flex justify-between gap-3 group hover:bg-[#6E62E5] rounded-md`}
+                                        >
+                                        <div className='flex gap-3 items-center'>
+                                            <span className='text-[#6E62E5] group-hover:text-white'>{item.icon}</span>
+                                            <span className='group-hover:text-white'>{item.title}</span>
+                                        </div>
+                                        <div className={``}>
+                                            {item.subMenu && (<ChevronDown size={15} />)}
+                                        </div>
+                                    </motion.button>
+                                    <div></div>
+                                    {subMenuOpen === item.path && (
+                                        <div className={` flex flex-col  transition-all duration-500 ease-in`}>
                                             <div className='flex items-center  ml-12 relative'>
-                                                <div className='h-full w-[1px] bg-gray-600'>
+                                                <div className='h-full w-[1px] bg-gray-300'>
                                                 </div>
                                                 <div className='ml-3'>
-                                                    {item.options?.map((option: any) => (
-                                                        <div className="flex items-center gap-4 my-2 hover:text-white transition ease-in-out delay-150">
-                                                            <div className='h-[1px] w-4 bg-gray-600 absolute left-0'></div>
-                                                            <Link href={option.url} className='ml-2'>{option.title}</Link>
+                                                    {item.subMenuItems?.map((option: any) => (
+                                                        <div className="flex items-center gap-4 my-2 hover:font-medium transition ease-in-out delay-150">
+                                                            <div className='h-[1px] bg-gray-300 w-4 absolute left-0'></div>
+                                                            <Link href={option.path} className='ml-2'>{option.title}</Link>
                                                         </div>
                                                     ))}
                                                 </div>
-
                                             </div>
                                         </div>
-                                    </div>
-                                ))}
+
+                                    )}
+                                </div>
+                                {/* ))} */}
                             </CommandGroup>
                         ))}
                     </CommandList>
