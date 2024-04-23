@@ -29,8 +29,8 @@ export const SideBarItems: TSideBarItems[] = [
         icon: <Users size={20} />,
         subMenu: true,
         subMenuItems: [
-            { title: "Add Customer", path: "/add-customer" },
-            { title: "Customer List", path: "/customer-list" },
+            { title: "Add Customer", path: "/customer/add-customer" },
+            { title: "Customer List", path: "/customer/customer-list" },
         ]
     },
     {
@@ -39,10 +39,10 @@ export const SideBarItems: TSideBarItems[] = [
         icon: <ShoppingBag size={20} />,
         subMenu: true,
         subMenuItems: [
-            { title: "Add Category", path: "/add-category" },
-            { title: "Category List", path: "/category-list" },
-            { title: "Add Product", path: "/add-product" },
-            { title: "Manage Product", path: "/manage-product" },
+            { title: "Add Category", path: "/product/add-category" },
+            { title: "Category List", path: "/product/category-list" },
+            { title: "Add Product", path: "/product/add-product" },
+            { title: "Manage Product", path: "/product/manage-product" },
         ]
     },
     {
