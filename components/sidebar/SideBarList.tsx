@@ -27,34 +27,31 @@ const SideBarList = ({ item }: { item: TSideBarItems }) => {
         return true;
       }
     }
-
     return path === pathname;
   }, [subMenuItems, path, pathname]);
 
   return (
     <div>
-      <div onClick={activeHandler} className={`${isActive && "bg-[#eeedff] text-[#6E62E5]"} flex gap-3 items-center my-2 hover:bg-[#eeedff] p-2 rounded-md cursor-pointer hover:text-[#6E62E5]`}>
+      <div onClick={activeHandler} className={`${isActive && "bg-[#6E62E5] text-white"} flex gap-3 items-center my-2 group hover:bg-[#6E62E5] p-2 rounded-md cursor-pointer hover:text-white`}>
         <div className='flex items-center justify-between w-full'>
           <div className='flex gap-3 items-center text-sm'>
-            <span className='text-[#6E62E5] group-hover:text-white'>{icon}</span>
+            <span className={`${isActive && " text-white"} text-[#6E62E5] group-hover:text-white`}>{icon}</span>
             <span className='group-hover:text-white'>{title}</span>
           </div>
           <div>
-            {subMenuItems && subMenuItems.length > 0 && <ChevronDown size={15} className={expanded ? "rotate-180 duration-200 ease-in-out":""} />}
+            {subMenuItems && subMenuItems.length > 0 && <ChevronDown size={15} className={expanded ? "rotate-180 duration-200 ease-in-out" : ""} />}
           </div>
         </div>
       </div>
       {expanded && (
-        <div className={` flex flex-col  transition-all duration-500 ease-in text-sm`}>
+        <div className={` flex flex-col  transition-all duration-500 ease-in text-sm h-full`}>
           <div className='flex items-center  ml-12 relative'>
-            <div className='h-full w-[2px] bg-red-500'>
-
-            </div>
+            <div className='h-full w-[1px] bg-gray-300 absolute'></div>
             <div className='ml-3'>
               {item.subMenuItems?.map((option: any) => (
                 <div className="flex items-center gap-4 my-2 hover:font-medium transition ease-in-out delay-150">
                   <div className='h-[1px] bg-gray-300 w-4 absolute left-0'></div>
-                  <Link href={path} className='ml-2'>{option.title}</Link>
+                  <Link href={option.path} className={`ml-2 ${isActive && "font-bold"}`}>{option.title}</Link>
                 </div>
               ))}
             </div>
