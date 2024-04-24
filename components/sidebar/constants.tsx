@@ -8,15 +8,9 @@ export const SideBarItems: TSideBarItems[] = [
         icon: <Gauge size={20} />
     },
     {
-        title: "test",
-        path: "/test",
-        icon: <Gauge size={20} />
-    },
-    {
         title: "Sale",
-        path: "#sale",
+        path: "/sale",
         icon: <BadgeCentIcon size={20} />,
-        subMenu: true,
         subMenuItems: [
             { title: "New Sale", path: "/new-sale" },
             { title: "Manage Sale", path: "/manage-sale" },
@@ -25,9 +19,8 @@ export const SideBarItems: TSideBarItems[] = [
     },
     {
         title: "Customer",
-        path: "#customer",
+        path: "/customer/customer-list",
         icon: <Users size={20} />,
-        subMenu: true,
         subMenuItems: [
             { title: "Add Customer", path: "/customer/add-customer" },
             { title: "Customer List", path: "/customer/customer-list" },
@@ -35,9 +28,8 @@ export const SideBarItems: TSideBarItems[] = [
     },
     {
         title: "Product",
-        path: "#products",
+        path: "/product/manage-product",
         icon: <ShoppingBag size={20} />,
-        subMenu: true,
         subMenuItems: [
             { title: "Add Category", path: "/product/add-category" },
             { title: "Category List", path: "/product/category-list" },
@@ -47,9 +39,8 @@ export const SideBarItems: TSideBarItems[] = [
     },
     {
         title: "Purchase",
-        path: "#purchase",
+        path: "/purchase",
         icon: <ShoppingCart size={20} />,
-        subMenu: true,
         subMenuItems: [
             { title: "Add Purchase", path: "/add-purchase" },
             { title: "Manage Purchase", path: "/manage-purchase" },

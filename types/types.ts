@@ -1,7 +1,7 @@
 export type TSideBarItems = {
     title: string
-    path?: string
+    path: string
     icon?: JSX.Element
-    subMenu?: boolean
+    // subMenu?: boolean
     subMenuItems?: TSideBarItems[]
 }

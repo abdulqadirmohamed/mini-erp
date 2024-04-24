@@ -8,7 +8,7 @@ export const CustomerForm = () => {
     return (
         <div className='border-[1px]'>
             <div>
-                <div className='border-[1px] border-gray-300 p-3 bg-white z-10'>
+                <div className='border-b-[1px] border-gray-300 p-3 bg-white z-10'>
                     <h1>Add Customer</h1>
                 </div>
                 <div className='m-10'>
