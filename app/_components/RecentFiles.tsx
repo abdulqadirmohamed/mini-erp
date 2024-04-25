@@ -1,4 +1,5 @@
 import React from 'react'
+import Image from 'next/image';
 import {
     Table,
     TableBody,
@@ -8,35 +9,18 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table"
-import { ArrowUpToLine, Clapperboard, File, Image } from 'lucide-react';
+import { ArrowUpToLine, Clapperboard, File } from 'lucide-react';
 
 
 const RecentFiles = () => {
-    const recentFiles = [
+    const products = [
         {
-            name: "Citizens Forum - Jariiban ",
-            user: 'abdulqadir',
-            fileSize: '500 mb',
-            fileType: 'video'
+            image: "https://images.pexels.com/photos/674884/pexels-photo-674884.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+            name: "Power bank",
+            costPrice: '30',
+            salePrice: '50',
         },
-        {
-            name: "Design software solution",
-            user: 'mohamed',
-            fileSize: '2 mb',
-            fileType: 'image'
-        },
-        {
-            name: "A STUDY ON THE IMPACT OF LAS-ANOD CONFLICT (HUMANITARIAN, SOCIAL AND ECONOMIC)",
-            user: 'abdulqadir',
-            fileSize: '5 mb',
-            fileType: 'document'
-        },
-        {
-            name: "Democratization & Elections in Puntland",
-            user: 'abdulqadir',
-            fileSize: '200 mb',
-            fileType: 'video'
-        },
+
 
     ]
     return (
@@ -45,28 +29,23 @@ const RecentFiles = () => {
                 <TableCaption>A list of your recent files.</TableCaption>
                 <TableHeader>
                     <TableRow>
-                        <TableHead>Name</TableHead>
-                        <TableHead>File Size</TableHead>
-                        <TableHead>User</TableHead>
-                        <TableHead>Creation time</TableHead>
-                        <TableHead className='text-right'>Download</TableHead>
+                        <TableHead>
+                            Image
+                        </TableHead>
+                        <TableHead>Product Name</TableHead>
+                        <TableHead>Sale Price</TableHead>
+                        <TableHead>Cost Price</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    {recentFiles.map((file) => (
+                    {products.map((item) => (
                         <TableRow>
                             <TableCell className="flex items-center gap-2 lowercase">
-                                {file.fileType == 'video' && <Clapperboard className='text-blue-700' size={20} />}
-                                {file.fileType == 'document' && <File size={20} className='text-yellow-500' />}
-                                {file.fileType == 'image' && <Image size={20} className='text-green-700' />}
-                                {file.name}
+                                <Image src={item.image} width={100} height={100} alt="product Image" className='rounded-md' />
                             </TableCell>
-                            <TableCell className='uppercase'>{file.fileSize}</TableCell>
-                            <TableCell>{file.user}</TableCell>
-                            <TableCell>23-03-2024</TableCell>
-                            <TableCell className='flex items-center gap-2 cursor-pointer text-center hover:text-blue-700'>
-                                <ArrowUpToLine size={15} /> Download
-                            </TableCell>
+                            <TableCell className='uppercase'>{item.name}</TableCell>
+                            <TableCell>${item.salePrice}</TableCell>
+                            <TableCell>${item.costPrice}</TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
