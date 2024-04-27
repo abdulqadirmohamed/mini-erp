@@ -12,7 +12,7 @@ import {
 import { ArrowUpToLine, Clapperboard, File } from 'lucide-react';
 
 
-const RecentFiles = () => {
+export default function LatestSales () {
     const products = [
         {
             image: "https://images.pexels.com/photos/674884/pexels-photo-674884.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -54,5 +54,3 @@ const RecentFiles = () => {
         </div>
     )
 }
-
-export default RecentFiles

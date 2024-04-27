@@ -1,6 +1,7 @@
+import LatestSales from "@/components/LatestSales";
 import { Button } from "@/components/ui/button";
 import { Clapperboard, File, Image, Images, ShoppingBag, ShoppingCart, User, Users } from "lucide-react";
-import RecentFiles from "./_components/RecentFiles";
+
 
 
 export default async function Home() {
@@ -48,7 +49,7 @@ export default async function Home() {
       <div className="mt-10">
         <div className="grid grid-cols-3">
           <div className="col-span-2">
-            <RecentFiles />
+            <LatestSales/>
           </div>
           <div>
 

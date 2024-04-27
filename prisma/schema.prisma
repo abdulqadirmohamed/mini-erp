@@ -13,9 +13,61 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Product {
+  id           Int         @id @default(autoincrement())
+  name         String
+  price        Float
+  categoryId   Int
+  supplierId   Int
+  Category     Category    @relation(fields: [categoryId], references: [id])
+  Supplier     Supplier    @relation(fields: [supplierId], references: [id])
+  OrderDetails OrderDetail[]
+}
+
+model Customer {
+  id           Int         @id @default(autoincrement())
+  name         String
+  email        String      @unique
+  phone        String?
+  Orders       Order[]
+}
+
+model Supplier {
+  id        Int        @id @default(autoincrement())
+  name      String
+  contact   String?
+  Products  Product[]
+}
+
+model Category {
+  id       Int       @id @default(autoincrement())
+  name     String
+  Products Product[]
+}
+
 model User {
-  id Int @id @default(autoincrement())
-  email String @db.VarChar(255)
-  password String @db.VarChar(255)
-  firstName String @db.VarChar(255) @map("first_name")
+  id       Int      @id @default(autoincrement())
+  username String   @unique
+  email    String   @unique
+  password String
+  Orders   Order[]
+}
+
+model Order {
+  id          Int         @id @default(autoincrement())
+  date        DateTime    @default(now())
+  customerId  Int
+  userId      Int
+  Customer    Customer    @relation(fields: [customerId], references: [id])
+  User        User        @relation(fields: [userId], references: [id])
+  OrderDetail OrderDetail[]
+}
+
+model OrderDetail {
+  id         Int      @id @default(autoincrement())
+  orderId    Int
+  productId  Int
+  quantity   Int
+  Product    Product  @relation(fields: [productId], references: [id])
+  Order      Order    @relation(fields: [orderId], references: [id])
 }

@@ -19,6 +19,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
+import Link from 'next/link'
 
 
 
@@ -40,21 +41,7 @@ const Header = () => {
       <CommandDemo />
       <div className='flex items-center gap-32 justify-end'>
         <div>
-          <Dialog>
-            <DialogTrigger className='bg-blue-700 px-4 py-2 rounded-md flex items-center gap-2 text-white'>
-              <Upload size={20}/>
-              Upload
-            </DialogTrigger>
-            <DialogContent>
-              <DialogHeader>
-                <DialogTitle>Are you absolutely sure?</DialogTitle>
-                <DialogDescription>
-                  This action cannot be undone. This will permanently delete your account
-                  and remove your data from our servers.
-                </DialogDescription>
-              </DialogHeader>
-            </DialogContent>
-          </Dialog>
+          <Link href={"/login"}>Logout</Link>
         </div>
         <DropdownMenu>
           <DropdownMenuTrigger className='outline-none'>

@@ -49,7 +49,7 @@ const SideBarList = ({ item }: { item: TSideBarItems }) => {
             <div className='h-full w-[1px] bg-gray-300 absolute'></div>
             <div className='ml-3'>
               {item.subMenuItems?.map((option: any) => (
-                <div className="flex items-center gap-4 my-2 hover:font-medium duration-200 ease-in">
+                <div className="flex items-center gap-4 my-2 hover:font-medium duration-200 ease-in" key={option.title}>
                   <div className='h-[1px] bg-gray-300 w-4 absolute left-0'></div>
                   <Link href={option.path} className={`ml-2`}>{option.title}</Link>
                 </div>
