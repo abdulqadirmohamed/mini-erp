@@ -1,9 +1,9 @@
 
 import { DataTable } from './_components/data-table'
-import { User, columns } from './column'
+import { TProduct, columns } from './column'
 
-async function getUsers(): Promise<User[]> {
-  const res = await fetch('https://653e80049e8bd3be29df63ce.mockapi.io/customers', {
+async function getUsers(): Promise<TProduct[]> {
+  const res = await fetch('http://localhost:3000/api/product', {
     cache: 'no-cache'
   })
   const data = await res.json()

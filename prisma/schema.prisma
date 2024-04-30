@@ -9,65 +9,76 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
+  provider = "mongodb"
   url      = env("DATABASE_URL")
 }
 
 model Product {
-  id           Int         @id @default(autoincrement())
+  id           String        @id @default(auto()) @map("_id") @db.ObjectId
   name         String
   price        Float
-  categoryId   Int
-  supplierId   Int
-  Category     Category    @relation(fields: [categoryId], references: [id])
-  Supplier     Supplier    @relation(fields: [supplierId], references: [id])
+  image        String?
+  categoryId   String        @db.ObjectId
+  // supplierId   String        @db.ObjectId
+  Category     Category      @relation(fields: [categoryId], references: [id])
+  // Supplier     Supplier      @relation(fields: [supplierId], references: [id])
   OrderDetails OrderDetail[]
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
 }
 
 model Customer {
-  id           Int         @id @default(autoincrement())
-  name         String
-  email        String      @unique
-  phone        String?
-  Orders       Order[]
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  name      String
+  email     String?
+  phone     String
+  Orders    Order[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
-model Supplier {
-  id        Int        @id @default(autoincrement())
-  name      String
-  contact   String?
-  Products  Product[]
-}
+// model Supplier {
+//   id        String    @id @default(auto()) @map("_id") @db.ObjectId
+//   name      String
+//   contact   String?
+//   Products  Product[]
+//   createdAt DateTime  @default(now())
+// }
 
 model Category {
-  id       Int       @id @default(autoincrement())
-  name     String
-  Products Product[]
+  id        String    @id @default(auto()) @map("_id") @db.ObjectId
+  name      String
+  status    Boolean
+  Products  Product[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
 }
 
 model User {
-  id       Int      @id @default(autoincrement())
-  username String   @unique
-  email    String   @unique
-  password String
-  Orders   Order[]
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  email     String   @unique
+  password  String
+  Orders    Order[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Order {
-  id          Int         @id @default(autoincrement())
-  date        DateTime    @default(now())
-  customerId  Int
-  userId      Int
-  Customer    Customer    @relation(fields: [customerId], references: [id])
-  User        User        @relation(fields: [userId], references: [id])
+  id          String        @id @default(auto()) @map("_id") @db.ObjectId
+  date        DateTime      @default(now())
+  customerId  String        @db.ObjectId
+  userId      String        @db.ObjectId
+  Customer    Customer      @relation(fields: [customerId], references: [id])
+  User        User          @relation(fields: [userId], references: [id])
   OrderDetail OrderDetail[]
+  createdAt   DateTime      @default(now())
 }
 
 model OrderDetail {
-  id         Int      @id @default(autoincrement())
-  orderId    Int
-  productId  Int
-  quantity   Int
-  Product    Product  @relation(fields: [productId], references: [id])
-  Order      Order    @relation(fields: [orderId], references: [id])
+  id        String  @id @default(auto()) @map("_id") @db.ObjectId
+  orderId   String  @db.ObjectId
+  productId String  @db.ObjectId
+  quantity  String
+  Product   Product @relation(fields: [productId], references: [id])
+  Order     Order   @relation(fields: [orderId], references: [id])
 }

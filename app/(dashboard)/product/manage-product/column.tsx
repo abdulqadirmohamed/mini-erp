@@ -15,17 +15,17 @@ import { Checkbox } from "@/components/ui/checkbox"
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
-export type User = {
+export type TProduct = {
   id: string
   image: string
   name: string
-  email: string
-  phone: string
+  price: string
+  category: string
   created_at: string
   Action: string
 }
 
-export const columns: ColumnDef<User>[] = [
+export const columns: ColumnDef<TProduct>[] = [
 
   {
     id: "select",
@@ -66,22 +66,12 @@ export const columns: ColumnDef<User>[] = [
     },
   },
   {
-    accessorKey: "email",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Email
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      )
-    },
+    accessorKey: "price",
+    header: "Price",
   },
   {
-    accessorKey: "phone",
-    header: "Phone",
+    accessorKey: "category",
+    header: "Category",
   },
   
   {
