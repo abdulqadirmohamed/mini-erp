@@ -2,7 +2,7 @@
 import { DataTable } from './_components/data-table'
 import { TProduct, columns } from './column'
 
-async function getUsers(): Promise<TProduct[]> {
+async function getProducts(): Promise<TProduct[]> {
   const res = await fetch('http://localhost:3000/api/product', {
     cache: 'no-cache'
   })
@@ -11,7 +11,7 @@ async function getUsers(): Promise<TProduct[]> {
 }
 export default async function page (){ 
 // export default async function page () {
-  const data = await getUsers()
+  const data = await getProducts()
   return (
     <div>
       <DataTable columns={columns} data={data}/>

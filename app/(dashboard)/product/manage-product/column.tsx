@@ -70,7 +70,7 @@ export const columns: ColumnDef<TProduct>[] = [
     header: "Price",
   },
   {
-    accessorKey: "category",
+    accessorKey: "Category.name",
     header: "Category",
   },
   
